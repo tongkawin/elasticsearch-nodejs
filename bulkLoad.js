@@ -1,30 +1,33 @@
 var client = require('./connection.js');
-var articlesJson = require("./articles.json");
-var bulkArticlesArray = [];
+var DataJson = require("./data.json");
+var bulkDataArray = [];
 
-var makeBulkArray = function (articles, callback) {
-    for (var current in articles) {
-        bulkArticlesArray.push(
-            { index: { _index: 'search-articles', _type: 'articles', _id: articles[current].ID } },
+var makeBulkArray = function (data, callback) {
+    
+    for (var current in data) {
+        bulkDataArray.push(
+            { index: { _index: 'search-data', _type: 'data', _id: data[current]._id} },
             {
-                "ID" : articles[current].ID,
-                "Title": articles[current]["Title"],
-                "Meta Description": articles[current]["Meta Description"],
-                "Meta Keywords": articles[current]["Meta Keywords"],
-                "Categories": articles[current]["Categories"],
-                "Tags": articles[current]["Tags"],
-                "Status": articles[current]["Status"]
+                "Index" : data[current]["_index"],
+                "Type": data[current]["_type"],
+                "ID": data[current]._id,
+                "Version": data[current]["_version"],
+                "Score": data[current]._score,
+                "RequestUid": data[current]._source["requestUid"],
+                "Source": data[current]["_source"],
+                "Fields": data[current]["fields"],
+                "Sort": data[current]["sort"] 
             }
         );
     }
-    callback(bulkArticlesArray);
+    callback(bulkDataArray);
 }
 
-var indexArticlesBulk = function (bulkArr, callback) {
+var indexDataBulk = function (bulkArr, callback) {
     client.bulk({
         maxRetries: 5,
-        index: 'search-articles',
-        type: 'articles',
+        index: 'search-data',
+        type: 'data',
         body: bulkArr
     }, function (err, resp, status) {
         if (err) {
@@ -36,11 +39,11 @@ var indexArticlesBulk = function (bulkArr, callback) {
     })
 }
 
-makeBulkArray(articlesJson, function (response) {
-    console.log('Bulk Articles: \n');
+makeBulkArray(DataJson, function (response) {
+    console.log('Bulk Data: \n');
     console.log(JSON.stringify(response, null, 2));
 
-    indexArticlesBulk(response, function (response) {
+    indexDataBulk(response, function (response) {
         console.log(response);
     })
 });

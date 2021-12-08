@@ -1,7 +1,7 @@
 var client = require('./connection.js');
 
 client.indices.create({  
-  index: 'articles'
+  index: 'data'
 },function(err,resp,status) {
   if(err) {
     console.log(err);
