@@ -13,6 +13,8 @@ node createIndex.js
 node bulkLoad.js
 ```
 
+If you have to update data you can run ```node bulkLoad.js```
+
 File detail
 ---
 `connection.js` for check elasticseach connection.
@@ -25,7 +27,7 @@ File detail
 
 `data.json` is data for seaching.
 
-`app.js` for add route that can be reached at ```http://localhost:3000/search-requestUid/:requestUid``` where `:requestUid` is replaced by searching term like `http://localhost:3000/search-requestUid/:requestUid`  
+`app.js` for add route that can be reached at ```http://localhost:3000/search-requestUid/:requestUid``` where `:requestUid` is replaced by searching term like `http://localhost:3000/search-requestUid/xxx`  
 
 <img width="1440" alt="Screen Shot 2021-12-09 at 11 00 16 AM" src="https://user-images.githubusercontent.com/69962474/145332281-d1663e67-9be5-432a-936e-5c15df0edfcf.png">
 
