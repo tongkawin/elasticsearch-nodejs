@@ -1,6 +1,6 @@
 # elasticsearch-nodejs
 
-Setup
+Setup (for macos)
 ---
 * Download Elasticsearh from https://www.elastic.co/downloads/elasticsearch
 * Run elasticsearch file in ../elasticsearch-x.x.x/bin
