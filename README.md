@@ -8,6 +8,7 @@ Setup (for macos)
 ```
 npm install
 node createIndex.js
+node bulkLoad.js
 ```
 
 If you want update data you can run ```node bulkLoad.js```
